@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th5 11, 2024 lúc 10:02 AM
+-- Thời gian đã tạo: Th5 18, 2024 lúc 01:14 PM
 -- Phiên bản máy phục vụ: 10.4.28-MariaDB
 -- Phiên bản PHP: 8.2.4
 
@@ -31,16 +31,6 @@ CREATE TABLE `category` (
   `id` int(11) NOT NULL,
   `name` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Đang đổ dữ liệu cho bảng `category`
---
-
-INSERT INTO `category` (`id`, `name`) VALUES
-(1, 'Nam'),
-(2, 'Nữ'),
-(3, 'Bé trai'),
-(4, 'Bé gái');
 
 -- --------------------------------------------------------
 
@@ -143,7 +133,7 @@ CREATE TABLE `role` (
 
 INSERT INTO `role` (`id`, `name`) VALUES
 (1, 'admin'),
-(2, 'Tiến');
+(2, 'user');
 
 -- --------------------------------------------------------
 
@@ -156,6 +146,17 @@ CREATE TABLE `tokens` (
   `token` varchar(32) NOT NULL,
   `created_at` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `tokens`
+--
+
+INSERT INTO `tokens` (`user_id`, `token`, `created_at`) VALUES
+(3, '10879ad7bc6925d0d19c954d776d17ec', '2024-05-18 13:07:42'),
+(3, '3252df26d7e7c991c7d46632b1de3c72', '2024-05-18 13:12:08'),
+(3, '3bb91a8fdf3e09bf97ec58fc101b2e1f', '2024-05-18 13:10:37'),
+(3, '6a83c5f4d5d18f776c39dffe0e3dea97', '2024-05-18 12:31:05'),
+(3, '85faad46240433a0d248897d1c096a79', '2024-05-18 13:10:10');
 
 -- --------------------------------------------------------
 
@@ -181,8 +182,7 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`id`, `fullname`, `email`, `phone_number`, `address`, `password`, `role_id`, `created_at`, `updated_at`, `deleted`) VALUES
-(1, 'admin', 'admin@gmail.com', '012345678912', 'TP.Hồ Chí Minh', '123', 1, NULL, NULL, NULL),
-(2, 'Đỗ Đình Tiến', 'dotien@gmail.com', '0367494410', 'Quảng ngãi', '456', 2, NULL, NULL, NULL);
+(3, 'Đỗ Đình Tiến', 'tien111@gmail.com', NULL, NULL, 'ef09a55ef85ad5fb6e25fa9f7eb08525', 2, '2024-05-18 11:25:49', '2024-05-18 11:25:49', 0);
 
 --
 -- Chỉ mục cho các bảng đã đổ
@@ -292,13 +292,13 @@ ALTER TABLE `product`
 -- AUTO_INCREMENT cho bảng `role`
 --
 ALTER TABLE `role`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT cho bảng `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- Các ràng buộc cho các bảng đã đổ
