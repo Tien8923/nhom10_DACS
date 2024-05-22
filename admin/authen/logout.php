@@ -7,4 +7,5 @@ require_once('../../database/dbhelper.php');
 $token = getCookie('token');
 setcookie('token', '', time() -100, '/');
 
+header('Location: login.php');
 session_destroy();
