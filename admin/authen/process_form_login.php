@@ -8,7 +8,7 @@ if(!empty($_POST)) {
     $pwd = getPost('password');
     $pwd = getSecurityMDS($pwd);
 
-    $sql = "select * from user where email = '$email' and password = '$pwd'";
+    $sql = "select * from user where email = '$email' and password = '$pwd' and deleted = 0";
     $userExist = executeResult($sql, true);
     if($userExist == null) {
         $msg = 'Đăng nhập không thành công, vui lòng kiểm tra lại email hoặc mật khẩu!!!';
