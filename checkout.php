@@ -36,7 +36,10 @@ if(!isset($_SESSION['cart'])) {
 	$_SESSION['cart'] = [];
 }
 $index = 0;
+$totalPrice = 0; // Initialize total price
 foreach($_SESSION['cart'] as $item) {
+	$itemTotal = $item['discount'] * $item['num'];
+	$totalPrice += $itemTotal; // Add item total to total price
 	echo '<tr>
 			<td>'.(++$index).'</td>
 			<td>'.$item['title'].'</td>
@@ -44,10 +47,14 @@ foreach($_SESSION['cart'] as $item) {
 			<td>
 				'.$item['num'].'
 			</td>
-			<td>'.number_format($item['discount'] * $item['num']).' VND</td>
+			<td>'.number_format($itemTotal).' VND</td>
 		</tr>';
 }
 ?>
+		<tr>
+			<td colspan="4" style="text-align: right;"><strong>Tổng tiền:</strong></td>
+			<td><strong><?php echo number_format($totalPrice); ?> VND</strong></td>
+		</tr>
 		</table>
 		<a href="checkout.php"><button class="btn btn-success" style="border-radius: 0px; font-size: 26px; width: 100%;">THANH TOÁN</button></a>
 		</div>

@@ -18,7 +18,10 @@ if(!isset($_SESSION['cart'])) {
 	$_SESSION['cart'] = [];
 }
 $index = 0;
+$totalAmount = 0;
 foreach($_SESSION['cart'] as $item) {
+	$itemTotal = $item['discount'] * $item['num'];
+	$totalAmount += $itemTotal;
 	echo '<tr>
 			<td>'.(++$index).'</td>
 			<td><img src="'.$item['thumbnail'].'" style="height: 80px"/></td>
@@ -28,11 +31,16 @@ foreach($_SESSION['cart'] as $item) {
 				<input type="number" id="num_'.$item['id'].'" value="'.$item['num'].'" class="form-control" style="width: 90px; border-radius: 0px" onchange="fixCartNum('.$item['id'].')"/>
 				<button class="btn btn-light" style="border: solid #e0dede 1px; border-radius: 0px;" onclick="addMoreCart('.$item['id'].', 1)">+</button>
 			</td>
-			<td>'.number_format($item['discount'] * $item['num']).' VND</td>
+			<td>'.number_format($itemTotal).' VND</td>
 			<td><button class="btn btn-danger" onclick="updateCart('.$item['id'].', 0)">Xoá</button></td>
 		</tr>';
 }
 ?>
+			<tr>
+				<td colspan="5"><strong>Tổng Tiền</strong></td>
+				<td><strong><?php echo number_format($totalAmount); ?> VND</strong></td>
+				<td></td>
+			</tr>
 		</table>
 		<a href="checkout.php"><button class="btn btn-success" style="border-radius: 0px; font-size: 26px;">TIẾP TỤC THANH TOÁN</button></a>
 	</div>
